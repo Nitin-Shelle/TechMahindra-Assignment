@@ -1,0 +1,28 @@
+name: Run Data Processing Script
+
+on:
+  push:
+    branches:
+      - main  # Runs the script when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main  # Also runs when a pull request is created
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Get the latest code from GitHub
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'  # Use Python 3.9
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas  # Install required libraries
+
+      - name: Run Data Processing Script
+        run: python main.py  # Execute the main script
