@@ -24,5 +24,8 @@ jobs:
         run: |
           pip install pandas  # Install required libraries
 
+      - name: Run Tests
+        run: pytest test_main.py  # Execute tests
+
       - name: Run Data Processing Script
         run: python main.py  # Execute the main script
