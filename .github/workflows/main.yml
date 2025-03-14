@@ -22,10 +22,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas pytest  # Explicitly install pytest
+          pip install pandas pytest  # ✅ Ensure pytest is installed
 
       - name: Run Data Processing Script
-        run: python main.py  # Execute the main script
+        run: python main.py  # ✅ Execute your main script
 
       - name: Run Tests
-        run: python -m pytest test_main.py  # Run pytest using Python
+        run: python -m pytest test_main.py  # ✅ Run pytest using Python module
