@@ -3,29 +3,29 @@ name: Run Data Processing Script
 on:
   push:
     branches:
-      - main  # Runs the script when code is pushed to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Also runs when a pull request is created
+      - main
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3  # Get the latest code from GitHub
+        uses: actions/checkout@v3
 
       - name: Set Up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9'  # Use Python 3.9
+          python-version: '3.9'
 
       - name: Install Dependencies
         run: |
-          pip install pandas  # Install required libraries
-
-      - name: Run Tests
-        run: pytest test_main.py  # Execute tests
+          pip install pandas pytest  # Explicitly install pytest
 
       - name: Run Data Processing Script
         run: python main.py  # Execute the main script
+
+      - name: Run Tests
+        run: python -m pytest test_main.py  # Run pytest using Python
