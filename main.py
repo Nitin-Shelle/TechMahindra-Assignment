@@ -29,10 +29,10 @@ df = df[(df["age"] >= 15) & (df["age"] <= 50)]
 df.dropna(subset=["runs", "wickets"], inplace=True)
 
 # Assign "Player Type"
-def classify_player(row):
-    if row["runs"] > 500 and row["wickets"] > 50:
+def classify_player(runs, wickets):
+    if runs > 500 and wickets > 50:
         return "All-Rounder"
-    elif row["runs"] > 500:
+    elif runs > 500:
         return "Batsman"
     else:
         return "Bowler"
