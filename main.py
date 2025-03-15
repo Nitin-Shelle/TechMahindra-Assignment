@@ -37,7 +37,7 @@ def classify_player(runs, wickets):
     else:
         return "Bowler"
 
-df["Player Type"] = df.apply(classify_player, axis=1)
+df["Player Type"] = df.apply(lambda row: classify_player(row["runs"], row["wickets"]), axis=1)
 
 # Split data into ODI and Test results
 df_odi = df[df["eventType"] == "ODI"]
