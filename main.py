@@ -1,11 +1,15 @@
 import pandas as pd
+import os
 import json
 
-# File paths
-csv_file = r"D:\Python\Pandas\Assignment\test_input_DataSet1.csv"
-json_file = r"D:\Python\Pandas\Assignment\test_input_Dataset2.json"
-test_output_file = r"D:\Python\Pandas\Assignment\test_output_dataset.csv"
-odi_output_file = r"D:\Python\Pandas\Assignment\od_output_dataset.csv"
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# File paths (Using Relative Paths)
+csv_file = os.path.join(current_dir, "test_input_DataSet1.csv")
+json_file = os.path.join(current_dir, "test_input_Dataset2.json")
+test_output_file = os.path.join(current_dir, "test_output_dataset.csv")
+odi_output_file = os.path.join(current_dir, "od_output_dataset.csv")
 
 # Read CSV file
 df_csv = pd.read_csv(csv_file)
@@ -55,8 +59,11 @@ print("Processed ODI Data Columns:", df_odi.columns)
 df_test["Result"] = df_test.apply(lambda row: "PASS" if row.equals(df_test_output.loc[df_test_output["playerName"] == row["playerName"]].squeeze()) else "FAIL", axis=1)
 df_odi["Result"] = df_odi.apply(lambda row: "PASS" if row.equals(df_odi_output.loc[df_odi_output["playerName"] == row["playerName"]].squeeze()) else "FAIL", axis=1)
 
-# Save test results
-df_test.to_csv(r"D:\Python\Pandas\Assignment\code\Result\test_result.csv", index=False)
-df_odi.to_csv(r"D:\Python\Pandas\Assignment\code\Result\odi_result.csv", index=False)
+# Save test results (Using Relative Paths)
+result_dir = os.path.join(current_dir, "Result")
+os.makedirs(result_dir, exist_ok=True)  # Create "Result" folder if it doesn't exist
+
+df_test.to_csv(os.path.join(result_dir, "test_result.csv"), index=False)
+df_odi.to_csv(os.path.join(result_dir, "odi_result.csv"), index=False)
 
 print("Processing complete. Test results saved.")
